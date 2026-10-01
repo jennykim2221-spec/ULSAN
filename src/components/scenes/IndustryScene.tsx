@@ -17,10 +17,6 @@ export function IndustryScene() {
     >
       <div className={styles.root}>
         <HorizontalArchive />
-        <div className={styles.actions}>
-          <a href="#dead-river">산업 아카이브 건너뛰기 <span lang="en">/ SKIP ARCHIVE</span></a>
-          
-        </div>
       </div>
     </SceneShell>
   );

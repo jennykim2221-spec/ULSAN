@@ -18,10 +18,6 @@ export function ExploreScene() {
     >
       <div className={styles.root}>
         <ExploreCollection />
-        <p className={styles.continue}>
-          <a href="#night">밤의 울산으로</a>
-          <span lang="en"> / CONTINUE TO NIGHT</span>
-        </p>
       </div>
     </SceneShell>
   );

@@ -14,24 +14,6 @@
 :global(.scroll-enhanced) [data-scene='explore'] [data-body-en],
 :global(.scroll-enhanced) [data-scene='explore'] [data-chapter-label] { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 :global(.scroll-enhanced) [data-scene='explore'] [data-scene-content] { margin: 0; }
-.continue { align-self: center; padding-bottom: 20px; }
-:global(.scroll-enhanced) .continue { position: absolute; right: 6vw; bottom: 3vh; padding: 0; font-size: 10px; z-index: 40; }
-:global(.scroll-enhanced) .continue span { display: none; }
 @media (max-width: 900px), (prefers-reduced-motion: reduce) {
   :global(.scroll-enhanced) [data-scene='explore'] [data-scene-inner] { height: auto; min-height: 100svh; }
-  :global(.scroll-enhanced) .continue { position: relative; inset: auto; padding: 20px; }
-}
-
-.continue {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: var(--fs-meta);
-}
-
-.continue a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }

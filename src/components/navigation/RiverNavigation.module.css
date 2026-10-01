@@ -1,9 +1,8 @@
 .chapters { position: fixed; top: 12px; right: 16px; z-index: calc(var(--z-nav) + 1); color: var(--palette-white); font-size: 12px; }
-.chapters summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 10px; padding: 0; background: none; border: 0; list-style: none; }
+.chapters summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; padding: 0; background: none; border: 0; list-style: none; }
 .chapters summary::-webkit-details-marker { display: none; }
 .chapters summary span { transition: transform .25s, color .25s; }
 .chapters summary:hover span { color: var(--palette-mint); transform: translateX(-2px); }
-.chapters summary:hover span:last-child { transform: translate(2px, -2px); }
 .list { max-height: calc(100svh - 120px); overflow-y: auto; overscroll-behavior: contain; background: var(--palette-black); padding: 8px; }
 .list a, .rail a { display: flex; align-items: center; min-height: 44px; padding: 4px 8px; text-decoration: none; }
 .list a[aria-current], .rail a[aria-current] { text-decoration: underline; text-underline-offset: 5px; }

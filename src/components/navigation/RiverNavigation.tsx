@@ -60,7 +60,7 @@ export function RiverNavigation({ active, ready, decorative }: { active: SceneId
       <details ref={menu} onKeyDown={event => {
         if (event.key === 'Escape') { menu.current!.open = false; menu.current!.querySelector('summary')?.focus(); }
       }}>
-        <summary aria-label="장면 이동"><span lang="en">CHAPTERS</span><span aria-hidden="true"> + ↗</span></summary>
+        <summary aria-label="장면 이동"><span lang="en">CHAPTERS</span></summary>
         <div className={styles.list}>{links}</div>
       </details>
     </nav>

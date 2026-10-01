@@ -1,5 +1,1 @@
 .root { position: relative; }
-.actions { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 3rem; font-size: 12px; }
-:global(.scroll-enhanced) .actions { position: absolute; left: var(--layout-gutter); bottom: 24px; z-index: 40; margin: 0; align-items: center; }
-.actions a { text-underline-offset: 5px; }
-.actions > a { display: inline-flex; align-items: center; min-height: 44px; }

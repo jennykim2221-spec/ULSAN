@@ -172,10 +172,8 @@ export const uiCopy = {
   startJourney: { ko: '이야기 시작', en: 'START THE JOURNEY' },
   skipToContent: { ko: '본문으로 건너뛰기', en: 'SKIP TO CONTENT' },
   continueViewing: { ko: '계속 보기', en: 'CONTINUE' },
-  continueToNight: { ko: '밤의 울산으로', en: 'CONTINUE TO NIGHT' },
   replay: { ko: '다시 흐르기', en: 'REPLAY' },
   exploreUlsan: { ko: '울산 더 둘러보기', en: 'EXPLORE ULSAN' },
-  skipArchive: { ko: '산업 아카이브 건너뛰기', en: 'SKIP ARCHIVE' },
   officialInfoKorean: {
     ko: '공식 정보(한국어)',
     en: 'OFFICIAL INFORMATION (KOREAN)',
