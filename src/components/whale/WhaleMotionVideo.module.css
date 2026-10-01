@@ -5,3 +5,9 @@
 .subject video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: grayscale(1) contrast(1.08) brightness(.65); }
 .subject::after { content: ''; position: absolute; inset: 0; background: #23445b; mix-blend-mode: color; }
 .reading { position: relative; width: 100%; height: clamp(260px, 55vh, 620px); pointer-events: none; }
+.typography { position: absolute; top: 8vh; left: var(--layout-gutter); right: var(--layout-nav-reserve); z-index: 1; color: var(--palette-white); pointer-events: none; display: flex; flex-direction: column; }
+.typography[hidden] { display: none; }
+.label { order: -3; margin: 0 0 1rem; font: 12px var(--font-mono); letter-spacing: .08em; }
+.titleKo { order: -1; font: 500 clamp(21px, 2vw, 32px)/1.25 var(--font-body); margin: 0 0 .5rem; }
+.titleEn { order: -2; font: 600 clamp(38px, 4vw, 68px)/1.05 var(--font-display); letter-spacing: .04em; text-transform: uppercase; margin: 0 0 1.25rem; }
+.body { font-size: 13px; line-height: var(--lh-body); max-width: 40em; margin: 0 0 .75rem; }

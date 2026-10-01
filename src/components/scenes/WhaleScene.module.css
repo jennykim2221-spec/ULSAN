@@ -4,6 +4,7 @@
   place-items: center;
 }
 .media { width: 100%; }
+:global(.scroll-enhanced) [data-whale-copy-overlay] [data-scene-copy] { width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 :global(.scroll-enhanced) [data-scene='whale'] [data-pin-stage] { overflow: clip; background: #050b14; }
 :global(.scroll-enhanced) [data-scene='whale'] [data-scene-inner] { display: block; height: 100svh; min-height: 0; max-width: none; padding: 0; }
 :global(.scroll-enhanced) [data-scene='whale'] [data-scene-inner] > header { position: absolute; z-index: 46; left: var(--layout-gutter); right: var(--layout-nav-reserve); top: 8vh; pointer-events: none; }

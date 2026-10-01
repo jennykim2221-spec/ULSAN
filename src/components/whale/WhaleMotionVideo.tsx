@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { copyBySceneId } from '@/data/copy';
 import styles from './WhaleMotionVideo.module.css';
 
 const source = `/assets/video/${encodeURIComponent('고래.mp4')}`;
@@ -13,6 +14,7 @@ const smooth = (p: number) => { const t = clamp(p); return t * t * (3 - 2 * t); 
 export function WhaleMotionVideo({ enabled }: { enabled: boolean }) {
   const host = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
+  const typography = useRef<HTMLDivElement>(null);
   const [readingHost, setReadingHost] = useState<HTMLElement | null>(null);
   useEffect(() => {
     let cancelled = false;
@@ -31,6 +33,7 @@ export function WhaleMotionVideo({ enabled }: { enabled: boolean }) {
     media.playbackRate = .8;
     if (!enabled) { layer.hidden = !readingHost; return; }
     if (readingHost) return;
+    whale.setAttribute('data-whale-copy-overlay', '');
 
     let active = false, playing = false, disposed = false;
     let closePass = false, passGate = 0;
@@ -52,7 +55,7 @@ export function WhaleMotionVideo({ enabled }: { enabled: boolean }) {
     const state = { reveal: 0 };
     const update = () => {
       if (disposed || !whale.dataset.scrollStart) return;
-      const start = position(whale, 0), end = position(jang, .38);
+      const start = position(whale, 0), end = position(jang, .30);
       // The source's broad rightward close pass begins around 6.1 seconds.
       // A quick chapter skip can complete the wipe without waiting for video frames.
       if (media.currentTime >= 5.8 || state.reveal > .85) closePass = true;
@@ -63,6 +66,10 @@ export function WhaleMotionVideo({ enabled }: { enabled: boolean }) {
       layer.style.opacity = String(smooth((scrollY - start) / Math.max(1, position(whale, .16) - start)));
       layer.style.clipPath = `inset(0 0 0 ${reveal * 100}%)`;
       layer.dataset.reveal = reveal.toFixed(5);
+      if (typography.current) {
+        typography.current.hidden = !visible;
+        typography.current.style.opacity = String(Number(layer.style.opacity) * (1 - smooth((reveal - .65) / .23)));
+      }
       active = visible;
       if (active && !document.hidden) { load(); play(); }
       else if (!media.paused || playing) { media.pause(); playing = false; }
@@ -70,13 +77,19 @@ export function WhaleMotionVideo({ enabled }: { enabled: boolean }) {
       jang.style.setProperty('--whale-copy-reveal', smooth((reveal - .94) / .06).toFixed(5));
 
       // Lift the actual next composition behind Jangsaengpo; no cloned media/content.
-      const underlay = scrollY >= position(jang, .60) && scrollY < position(next, 0);
+      const underlay = scrollY >= position(jang, .70) && scrollY < position(next, 0);
       next.toggleAttribute('data-jang-underlay', underlay);
-      if (underlay) nextInner.style.translate = `0 ${-nextStage.getBoundingClientRect().top}px`;
-      else nextInner.style.removeProperty('translate');
+      if (underlay) {
+        nextInner.style.translate = `0 ${-nextStage.getBoundingClientRect().top}px`;
+        const arrival = smooth((scrollY - position(jang, .70)) / Math.max(1, position(jang, 1) - position(jang, .70)));
+        next.style.setProperty('--port-arrival-scale', String(.965 + .035 * arrival));
+      } else {
+        nextInner.style.removeProperty('translate');
+        next.style.removeProperty('--port-arrival-scale');
+      }
     };
     const timeline = gsap.timeline().to(state, { reveal: 1, duration: 1, ease: 'power1.inOut' });
-    const trigger = ScrollTrigger.create({ id: 'ulsan-whale-video-master', trigger: whale, start: () => position(jang, 0), end: () => position(jang, .38), animation: timeline, scrub: 1.1, onRefresh: update });
+    const trigger = ScrollTrigger.create({ id: 'ulsan-whale-video-master', trigger: whale, start: () => position(jang, 0), end: () => position(jang, .30), animation: timeline, scrub: 1.1, onRefresh: update });
     const measured = () => { trigger.refresh(); update(); };
     const visibility = () => { if (document.hidden) { media.pause(); playing = false; } update(); };
     gsap.ticker.add(update);
@@ -92,10 +105,21 @@ export function WhaleMotionVideo({ enabled }: { enabled: boolean }) {
       media.removeEventListener('loadedmetadata', cue); media.removeEventListener('loadeddata', ready);
       media.pause(); media.removeAttribute('src'); media.load();
       nextInner.style.removeProperty('translate');
+      next.style.removeProperty('--port-arrival-scale');
+      whale.removeAttribute('data-whale-copy-overlay');
       next.removeAttribute('data-jang-underlay'); next.removeAttribute('data-jang-handoff');
       jang.style.removeProperty('--whale-title-reveal'); jang.style.removeProperty('--whale-copy-reveal');
     };
   }, [enabled, readingHost]);
   const subject = <div ref={host} className={readingHost ? styles.reading : styles.layer} data-whale-video hidden aria-hidden="true"><div className={styles.subject}><video ref={video} poster="/assets/video/whale-poster.png" muted loop playsInline preload="none" tabIndex={-1} data-whale-motion-video /></div></div>;
-  return readingHost ? createPortal(subject, readingHost) : <div className={styles.viewport} data-whale-viewport aria-hidden="true">{subject}</div>;
+  const copy = copyBySceneId.whale;
+  return readingHost ? createPortal(subject, readingHost) : <div className={styles.viewport} data-whale-viewport aria-hidden="true">{subject}
+    {/* Visual copy above the fixed video; the original SceneShell header remains the semantic heading. */}
+    <div ref={typography} className={styles.typography} data-whale-floating-copy hidden>
+      <p className={styles.label} lang="en">WHALE</p>
+      <p className={styles.titleKo}>{copy.title.ko}</p>
+      <p className={styles.titleEn} lang="en">{copy.title.en}</p>
+      <p className={styles.body}>{copy.body.ko}</p><p className={styles.body} lang="en">{copy.body.en}</p>
+    </div>
+  </div>;
 }

@@ -39,6 +39,8 @@
 }
 
 
-:global(.scroll-enhanced) [data-scene='sea'] .overview { width: 86vw; }
-:global(.scroll-enhanced) [data-scene='sea'] .overview figure { width: 100% !important; }
+:global(.scroll-enhanced) [data-scene='sea'][data-pinned='true'] .overview { inset: 0; width: 100%; height: 100%; translate: none; }
+:global(.scroll-enhanced) [data-scene='sea'][data-pinned='true'] .overview figure { width: 100% !important; height: 100%; aspect-ratio: auto !important; }
+:global(.scroll-enhanced) [data-scene='sea'][data-pinned='true'] .overview img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; }
+:global(.scroll-enhanced) [data-scene='sea'][data-pinned='true'] .root { scale: var(--port-arrival-scale, 1); transform-origin: center; }
 :global(.scroll-enhanced) [data-scene='sea'] .overview::after { content: ''; position: absolute; inset: 0; z-index: 12; pointer-events: none; background: linear-gradient(125deg, rgb(7 26 43 / .72), transparent 65%), linear-gradient(0deg, rgb(7 26 43 / .45), transparent 35%); }
