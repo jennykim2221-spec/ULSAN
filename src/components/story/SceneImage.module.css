@@ -1,0 +1,13 @@
+.frame {
+  position: relative;
+  margin: 0;
+  z-index: var(--z-photo);
+  max-width: 100%;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  /* cover / zoom / perspective distortion forbidden for archive photos */
+}

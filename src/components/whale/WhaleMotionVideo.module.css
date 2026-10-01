@@ -1,0 +1,7 @@
+﻿.viewport { position: fixed; inset: 0; z-index: 45; pointer-events: none; overflow: clip; }
+.layer { position: absolute; inset: 0; pointer-events: none; }
+.layer[hidden], .reading[hidden] { display: none; }
+.subject { position: absolute; inset: 0; overflow: hidden; background: #071a2b; }
+.subject video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; filter: grayscale(1) contrast(1.08) brightness(.65); }
+.subject::after { content: ''; position: absolute; inset: 0; background: #23445b; mix-blend-mode: color; }
+.reading { position: relative; width: 100%; height: clamp(260px, 55vh, 620px); pointer-events: none; }

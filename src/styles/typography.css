@@ -1,0 +1,57 @@
+/* Typography utilities — MASTER_BUILD_SPEC §2.3 */
+
+.fontDisplay {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.fontBody {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: var(--lh-body);
+}
+
+.fontMono {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: var(--fs-meta);
+  letter-spacing: 0.04em;
+}
+
+.titleEn {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  max-width: 100%;
+}
+
+.titleKo {
+  font-family: var(--font-body);
+  font-size: var(--fs-ko-title);
+  font-weight: 500;
+  max-width: var(--measure-body);
+}
+
+.bodyCopy {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  max-width: var(--measure-body);
+}
+
+.brandUlsan {
+  font-family: var(--font-display);
+  font-size: var(--fs-intro-brand);
+  line-height: 0.9;
+}
+
+.meta {
+  font-family: var(--font-mono);
+  color: inherit;
+  opacity: 0.85;
+}
+
+/* English spans always declare lang */
+[lang='en'] {
+  font-family: var(--font-display);
+}

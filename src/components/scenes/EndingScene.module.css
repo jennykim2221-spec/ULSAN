@@ -1,0 +1,7 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+}
+
+.root a { display: inline-flex; align-items: center; min-height: 44px; flex-wrap: wrap; gap: .35em; }

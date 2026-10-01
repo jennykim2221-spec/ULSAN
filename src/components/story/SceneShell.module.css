@@ -1,0 +1,208 @@
+.outer {
+  position: relative;
+  width: 100%;
+  min-height: var(--layout-scene-min-height);
+  background: var(--scene-bg, var(--token-intro-bg));
+  color: var(--scene-fg, var(--token-intro-fg));
+}
+
+.outer[data-token='intro'],
+.outer[data-token='loading'],
+.outer[data-token='night'] {
+  --scene-bg: var(--token-intro-bg);
+  --scene-fg: var(--token-intro-fg);
+}
+
+.outer[data-token='source'] {
+  --scene-bg: var(--token-source-bg);
+  --scene-fg: var(--token-source-fg);
+}
+
+.outer[data-token='upperStream'] {
+  --scene-bg: var(--token-upper-bg);
+  --scene-fg: var(--palette-white);
+}
+
+.outer[data-token='archive'] {
+  --scene-bg: var(--token-archive-bg);
+  --scene-fg: var(--token-archive-fg);
+}
+
+.outer[data-token='industry'] {
+  --scene-bg: var(--token-industry-bg);
+  --scene-fg: var(--color-text-on-dark);
+}
+
+.outer[data-token='deadRiver'] {
+  --scene-bg: var(--token-dead-bg);
+  --scene-fg: var(--color-text-on-dark);
+}
+
+.outer[data-token='recovery'] {
+  --scene-bg: var(--token-recovery-bg);
+  --scene-fg: var(--palette-white);
+}
+
+.outer[data-token='garden'] {
+  --scene-bg: var(--token-garden-bg);
+  --scene-fg: var(--token-garden-fg);
+}
+
+.outer[data-token='whale'] {
+  --scene-bg: var(--token-whale-bg);
+  --scene-fg: var(--token-whale-fg);
+}
+
+.stage {
+  position: relative;
+  min-height: var(--layout-scene-min-height);
+  width: 100%;
+  /* Phase 2: becomes sticky pin target */
+}
+
+.inner {
+  position: relative;
+  z-index: var(--z-copy);
+  margin: 0 auto;
+  max-width: var(--layout-max-content);
+  padding: clamp(48px, 8vh, 96px)
+    max(var(--layout-gutter), env(safe-area-inset-right, 0px) + var(--layout-gutter))
+    clamp(48px, 8vh, 96px)
+    var(--layout-gutter);
+  /* Reserve right gutter for future river nav on desktop */
+  padding-right: calc(var(--layout-gutter) + var(--layout-nav-reserve));
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+  opacity: 1;
+}
+
+.titleKo {
+  font-family: var(--font-body);
+  font-size: var(--fs-ko-title);
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 0 0 0.5rem;
+  max-width: var(--measure-body);
+}
+
+.titleEn {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+  max-width: var(--measure-body);
+  opacity: 0.9;
+}
+
+.body {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  max-width: var(--measure-body);
+  margin: 0 0 0.75rem;
+}
+
+.bodyEn {
+  font-family: var(--font-body);
+  font-size: calc(var(--fs-body) * 0.92);
+  line-height: var(--lh-body);
+  max-width: var(--measure-body);
+  margin: 0 0 1.5rem;
+  opacity: 1;
+}
+
+.content {
+  position: relative;
+  z-index: var(--z-photo);
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 1279px), (max-height: 639px) {
+  .inner {
+    padding-right: var(--layout-gutter);
+  }
+}
+
+.inner { overflow-wrap: anywhere; }
+.outer[data-token='intro'] .titleEn { font-size: var(--fs-intro-brand); }
+@media (max-width: 767px) { .titleEn { font-size: clamp(28px, 7vw, 52px); } .outer[data-token='intro'] .titleEn { font-size: clamp(64px, 19vw, 144px); } }
+/* Phase 2 progressive enhancement: no fixed heights or hidden content without JS. */
+.outer [data-river-layer] { display: none; }
+.titleEn { line-height: 1.05; }
+:global(.scroll-enhanced) .inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 3vw;
+  align-items: center;
+  min-height: 100svh;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+:global(.scroll-enhanced) .inner > header { display: flex; flex-direction: column; min-width: 0; }
+:global(.scroll-enhanced) .label { order: -3; }
+:global(.scroll-enhanced) .titleEn { order: -2; font-size: clamp(64px, 6vw, 112px); letter-spacing: .01em; }
+:global(.scroll-enhanced) .titleKo { order: -1; font-size: clamp(28px, 2.4vw, 46px); }
+:global(.scroll-enhanced) .content { margin-top: 0; min-width: 0; }
+:global(.scroll-enhanced) .content figure {
+  width: min(100%, var(--image-width), calc(46svh * var(--image-ratio))) !important;
+  margin-inline: auto;
+}
+/* Until later scene timelines exist, preserve every Foundation image in flow. */
+:global(.scroll-enhanced) [data-scene='recovery'] .content figure { width: min(100%, 300px) !important; }
+:global(.scroll-enhanced) [data-scene='dead-river'] [data-scene-content] > div { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; }
+:global(.scroll-enhanced) [data-scene='dead-river'] .content figure { width: min(100%, 420px) !important; }
+:global(.scroll-enhanced) [data-scene='explore'] .inner { display: block; }
+:global(.scroll-enhanced) [data-scene='explore'] .content { margin-top: 2rem; }
+:global(.scroll-enhanced) [data-scene='intro'] .inner,
+:global(.scroll-enhanced) [data-scene='ending'] .inner { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 1rem; }
+:global(.scroll-enhanced) [data-scene='intro'] [data-scene-content] > div { min-height: 0; }
+:global(.scroll-enhanced) [data-scene='intro'] .titleEn { font-size: var(--fs-intro-brand); }
+:global(.scroll-enhanced) [data-scene='intro'] .titleKo { font-size: var(--fs-ko-title); }
+:global(.scroll-enhanced) .outer [data-river-layer] {
+  display: block;
+  position: absolute;
+  inset: 15% 10% 15% 50%;
+  z-index: var(--z-decor);
+  pointer-events: none;
+  opacity: .6;
+}
+:global(.scroll-enhanced) .outer [data-river-layer] svg { height: 100%; width: 100%; }
+:global(.scroll-enhanced) .outer[data-pinned='true'] .stage { height: 100svh; }
+:global(.scroll-enhanced) .outer[data-pinned='false'] .inner { align-items: start; }
+/* Large content is never cropped: runtime declines pin when this inner exceeds H. */
+
+/* Phase 3 only: full scene exhibition surfaces, activated by the existing runtime. */
+:global(.scroll-enhanced) [data-scene='history'] .inner,
+:global(.scroll-enhanced) [data-scene='industry'] .inner { display: block; height: 100svh; min-height: 0; max-width: none; padding: 0; }
+:global(.scroll-enhanced) [data-scene='history'] .stage,
+:global(.scroll-enhanced) [data-scene='industry'] .stage { overflow: clip; }
+:global(.scroll-enhanced) [data-scene='history'] .inner > header,
+:global(.scroll-enhanced) [data-scene='industry'] .inner > header { position: absolute; top: 5vh; left: var(--layout-gutter); right: var(--layout-nav-reserve); z-index: 35; pointer-events: none; }
+:global(.scroll-enhanced) [data-scene='history'] .titleEn,
+:global(.scroll-enhanced) [data-scene='industry'] .titleEn { font-size: clamp(48px, 5vw, 84px); margin-bottom: 8px; }
+:global(.scroll-enhanced) [data-scene='history'] .titleKo,
+:global(.scroll-enhanced) [data-scene='industry'] .titleKo { font-size: 24px; margin-bottom: 8px; }
+:global(.scroll-enhanced) [data-scene='history'] .body,
+:global(.scroll-enhanced) [data-scene='industry'] .body { font-size: 15px; max-width: 60em; margin-bottom: 4px; }
+:global(.scroll-enhanced) [data-scene='history'] .bodyEn,
+:global(.scroll-enhanced) [data-scene='industry'] .bodyEn { font-size: 12px; max-width: 85em; }
+:global(.scroll-enhanced) [data-scene='history'] .label,
+:global(.scroll-enhanced) [data-scene='industry'] .label { margin-bottom: 10px; }
+:global(.scroll-enhanced) [data-scene='history'] .content figure { width: min(100%, var(--image-width), calc(42svh * var(--image-ratio))) !important; }
+
+:global(.scroll-enhanced) [data-scene='intro'] [data-river-layer] { inset: 8vh 20vw; opacity: 1; color: var(--palette-mint); }
+:global(.scroll-enhanced) [data-scene='intro'] [data-river-layer] svg { overflow: visible; }
+:global(.scroll-enhanced) [data-scene='intro'] [data-river-path] { vector-effect: non-scaling-stroke; stroke-width: 3px; }
+:global(.scroll-enhanced) [data-scene='intro'] [data-river-drop] { position: absolute; left: calc(50% - 9px); top: calc(50% - 9px); width: 18px; height: 18px; border-radius: 50%; background: var(--palette-mint); }
+:global(.scroll-enhanced) [data-scene='intro'] .inner { align-items: center; text-align: center; padding-inline: var(--layout-gutter); height: 100svh; min-height: 0; }
+:global(.scroll-enhanced) [data-scene='intro'] .inner > header { align-items: center; }
+:global(.scroll-enhanced) [data-scene='intro'] .label { display: none; }
+:global(.scroll-enhanced) [data-scene='intro'] .titleKo { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+:global(.scroll-enhanced) [data-scene='intro'] .body { font-size: clamp(22px, 2vw, 32px); }

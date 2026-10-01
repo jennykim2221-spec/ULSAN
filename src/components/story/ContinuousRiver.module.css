@@ -1,0 +1,4 @@
+.river { position: fixed; left: 34vw; top: 8vh; width: 32vw; height: 84vh; pointer-events: none; z-index: 34; color: var(--palette-white); }
+.river[hidden] { display: none; }
+.river svg { width: 100%; height: 100%; overflow: visible; }
+@media (prefers-reduced-motion: reduce) { .river { display: none; } }

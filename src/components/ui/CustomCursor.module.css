@@ -1,0 +1,3 @@
+.cursor { position: fixed; top: 0; left: 0; pointer-events: none; z-index: var(--z-cursor); color: var(--palette-white); font: 11px var(--font-mono); letter-spacing: .06em; white-space: nowrap; text-shadow: 0 1px 5px #071a2b; }
+.cursor[hidden] { display: none; }
+.cursor span { display: block; }

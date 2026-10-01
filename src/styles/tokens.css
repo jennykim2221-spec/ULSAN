@@ -1,0 +1,95 @@
+/* Design tokens — MASTER_BUILD_SPEC §2.1–2.3 */
+
+:root {
+  --palette-black: #050607;
+  --palette-navy: #071a2b;
+  --palette-white: #f2f3f0;
+  --palette-mint: #8ed8c6;
+  --token-loading-bg: var(--palette-black);
+  --token-loading-fg: var(--palette-white);
+  --token-intro-bg: var(--palette-black);
+  --token-intro-fg: var(--palette-white);
+  --token-source-bg: var(--palette-navy);
+  --token-source-fg: var(--palette-white);
+  --token-upper-bg: var(--palette-navy);
+  --token-upper-fg: var(--palette-white);
+  --token-archive-bg: var(--palette-black);
+  --token-archive-fg: var(--palette-white);
+  --token-industry-bg: var(--palette-black);
+  --token-industry-fg: var(--palette-white);
+  --token-dead-bg: var(--palette-black);
+  --token-dead-fg: var(--palette-white);
+  --token-recovery-bg: var(--palette-navy);
+  --token-recovery-fg: var(--palette-white);
+  --token-garden-bg: var(--palette-navy);
+  --token-garden-fg: var(--palette-white);
+  --token-whale-bg: var(--palette-navy);
+  --token-whale-fg: var(--palette-white);
+  --token-night-bg: var(--palette-black);
+  --token-night-fg: var(--palette-white);
+  --color-text-on-dark: var(--palette-white);
+  --color-text-on-light: var(--palette-black);
+  --color-text-muted-on-dark: rgb(242 243 240 / .72);
+  --color-text-muted-on-light: rgb(5 6 7 / .72);
+  --color-line: var(--palette-mint);
+  --color-focus: var(--palette-mint);
+
+  /* Layout — PC-first 1440×900 baseline */
+  --layout-max-content: 1600px;
+  --layout-gutter: 80px;
+  --layout-nav-reserve: 112px;
+  --layout-scene-min-height: 100svh;
+
+  /* Typography */
+  --font-display: 'Barlow Condensed', 'Arial Narrow', Impact, sans-serif;
+  --font-body: 'Noto Sans KR', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', monospace;
+
+  --fs-intro-brand: clamp(112px, 19vw, 320px);
+  --fs-display: clamp(64px, 8vw, 152px);
+  --fs-ko-title: clamp(28px, 3vw, 52px);
+  --fs-body: clamp(17px, 1.15vw, 20px);
+  --fs-meta: clamp(12px, 0.9vw, 14px);
+  --lh-body: 1.65;
+  --measure-body: 36em;
+
+  /* z-index stack */
+  --z-bg: 0;
+  --z-photo: 10;
+  --z-decor: 20;
+  --z-copy: 30;
+  --z-nav: 50;
+  --z-cursor: 60;
+  --z-dialog: 100;
+  --z-loading: 120;
+
+  /* Motion (Foundation: values reserved; Phase 2 wires them) */
+  --motion-scrub: 0.6;
+  --motion-hover-duration: 0.28s;
+}
+
+/* 1280–1439 */
+@media (max-width: 1439px) {
+  :root {
+    --layout-gutter: 48px;
+    --layout-nav-reserve: 88px;
+  }
+}
+
+/* Narrow / short: reading layout (no pin/WebGL in later phases) */
+@media (max-width: 1279px), (max-height: 639px) {
+  :root {
+    --layout-gutter: 24px;
+    --layout-nav-reserve: 0px;
+  }
+
+  html {
+    --mode-compact: 1;
+  }
+}
+
+@media (min-width: 1280px) and (min-height: 640px) {
+  html {
+    --mode-compact: 0;
+  }
+}

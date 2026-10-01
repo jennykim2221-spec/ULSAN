@@ -1,0 +1,1 @@
+.indicator { position: fixed; right: 16px; top: 16px; z-index: var(--z-nav); padding: .35rem .5rem; color: var(--palette-white); background: var(--palette-black); font: 12px var(--font-mono); pointer-events: none; }

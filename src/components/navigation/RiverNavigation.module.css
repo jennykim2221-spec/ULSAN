@@ -1,0 +1,26 @@
+.chapters { position: fixed; top: 12px; right: 16px; z-index: calc(var(--z-nav) + 1); color: var(--palette-white); font-size: 12px; }
+.chapters summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 10px; padding: 0; background: none; border: 0; list-style: none; }
+.chapters summary::-webkit-details-marker { display: none; }
+.chapters summary span { transition: transform .25s, color .25s; }
+.chapters summary:hover span { color: var(--palette-mint); transform: translateX(-2px); }
+.chapters summary:hover span:last-child { transform: translate(2px, -2px); }
+.list { max-height: calc(100svh - 120px); overflow-y: auto; overscroll-behavior: contain; background: var(--palette-black); padding: 8px; }
+.list a, .rail a { display: flex; align-items: center; min-height: 44px; padding: 4px 8px; text-decoration: none; }
+.list a[aria-current], .rail a[aria-current] { text-decoration: underline; text-underline-offset: 5px; }
+.river { position: fixed; top: 20vh; right: 20px; width: 72px; height: 60vh; z-index: var(--z-nav); color: var(--palette-white); pointer-events: none;  }
+.river svg { width: 100%; height: 100%; }
+.rail { position: fixed; right: 4px; top: max(64px, calc(50vh - 264px)); width: 100px; z-index: var(--z-nav); color: var(--palette-white); font: 12px var(--font-mono); }
+.rail a { min-width: 44px; position: relative; justify-content: flex-end; }
+.rail a::after { content: attr(data-index); padding: 2px 4px; background: var(--palette-black); }
+.rail a span { position: absolute; right: 100%; white-space: nowrap; padding: 8px; background: var(--palette-black); color: var(--palette-white); font: 12px var(--font-mono); opacity: 0; pointer-events: none; }
+.rail a:hover span, .rail a:focus-visible span { opacity: 1; }
+.rail a[aria-current]::after { outline: 1px solid currentColor; }
+.rail a:hover, .rail a:focus-visible, .rail a[aria-current] { opacity: 1; }
+.river[data-active='intro'], .river[data-active='sea'], .river[data-active='explore'], .river[data-active='night'], .river[data-active='ending'],
+.rail[data-active='intro'], .rail[data-active='source'], .rail[data-active='sea'], .rail[data-active='explore'], .rail[data-active='night'], .rail[data-active='ending'] { display: none; }
+@media (max-width: 1439px) { .river { width: 56px; right: 16px; } .rail { width: 80px; } }
+@media (max-width: 1279px), (max-height: 639px), (prefers-reduced-motion: reduce) { .river, .rail { display: none; } }
+.river { color: var(--palette-mint); }
+.river[data-active='dead-river'] { color: var(--palette-white); opacity: .28; }
+.list a[aria-current], .rail a[aria-current] { color: var(--palette-mint); }
+:global(.scroll-enhanced [data-active-scene='intro']) .chapters:not(:focus-within):not(:hover) { opacity: .2; }

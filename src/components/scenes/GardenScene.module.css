@@ -1,0 +1,47 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  margin: 0;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+.meta strong { display: block; font: 500 clamp(40px, 7vw, 100px)/1 var(--font-display); }
+.meta strong span { font-size: .35em; }
+.bamboo { display: flex; flex-direction: column; font-size: 24px; }
+.bamboo span[lang] { font-family: var(--font-display); }
+.frame { max-width: 100%; }
+.shadow { display: none; }
+:global(.scroll-enhanced) .shadow { display: block; position: absolute; inset: 14vh 4vw 4vh; pointer-events: none; background: repeating-linear-gradient(90deg, transparent 0 8%, rgb(4 19 22 / .65) 9% 11%, transparent 13% 18%); mask-image: linear-gradient(0deg, transparent, #000 20% 80%, transparent); }
+:global(.scroll-enhanced) .root { position: absolute; inset: 0; display: block; }
+:global(.scroll-enhanced) .stack { position: absolute; inset: 0; display: block; perspective: 1000px; }
+:global(.scroll-enhanced) .frame { position: absolute; inset: 31vh 12vw 12vh 18vw; display: flex; align-items: center; justify-content: center; transform-origin: center; }
+:global(.scroll-enhanced) .root.root .frame figure { width: min(100%, var(--image-width), calc(55svh * var(--image-ratio))) !important; }
+:global(.scroll-enhanced) .frame:last-child { inset: 20vh 10vw 12vh 24vw; }
+:global(.scroll-enhanced) .frame:nth-child(2) { left: 38vw; }
+:global(.scroll-enhanced) .root.root .frame:last-child figure { width: min(100%, 812px, calc(64svh * var(--image-ratio))) !important; }
+:global(.scroll-enhanced) .depthLayers { position: absolute; z-index: 2; left: 50%; top: 50%; width: min(100%, 812px, calc(64svh * 812 / 457)); aspect-ratio: 812 / 457; translate: -50% -50%; pointer-events: none; }
+:global(.scroll-enhanced) .depthLayers span { position: absolute; inset: 0; background-repeat: no-repeat; background-size: 100% 100%; transition: translate var(--return-duration, 0ms) ease-out; }
+:global(.scroll-enhanced) .depthBack { translate: var(--pointer-x, 0px) calc(var(--pointer-y, 0px) + var(--scroll-y, 0px)); -webkit-mask-image: linear-gradient(90deg, transparent 0 8%, #000 12% 19%, transparent 23% 35%, #000 38% 45%, transparent 49% 65%, #000 68% 74%, transparent 78% 86%, #000 90% 96%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0 8%, #000 12% 19%, transparent 23% 35%, #000 38% 45%, transparent 49% 65%, #000 68% 74%, transparent 78% 86%, #000 90% 96%, transparent 100%); }
+:global(.scroll-enhanced) .depthMiddle { translate: var(--pointer-x, 0px) calc(var(--pointer-y, 0px) + var(--scroll-y, 0px)); -webkit-mask-image: linear-gradient(90deg, transparent 0 20%, #000 24% 31%, transparent 35% 53%, #000 57% 64%, transparent 68% 78%, #000 81% 88%, transparent 92% 100%); mask-image: linear-gradient(90deg, transparent 0 20%, #000 24% 31%, transparent 35% 53%, #000 57% 64%, transparent 68% 78%, #000 81% 88%, transparent 92% 100%); }
+:global(.scroll-enhanced) .depthFront { translate: var(--pointer-x, 0px) calc(var(--pointer-y, 0px) + var(--scroll-y, 0px)); -webkit-mask-image: linear-gradient(90deg, #000 0 5%, transparent 10% 29%, #000 33% 39%, transparent 44% 86%, #000 90% 100%); mask-image: linear-gradient(90deg, #000 0 5%, transparent 10% 29%, #000 33% 39%, transparent 44% 86%, #000 90% 100%); }
+:global(.scroll-enhanced) .meta { position: absolute; left: var(--layout-gutter); top: 37vh; z-index: 22; }
+:global(.scroll-enhanced) .meta strong { font-size: clamp(72px, 10vw, 160px); }
+:global(.scroll-enhanced) .bamboo { position: absolute; left: 10vw; top: 30vh; margin: 0; z-index: 22; }
+:global(.scroll-enhanced) .bamboo span[lang] { font-size: clamp(72px, 10vw, 180px); line-height: .9; max-width: 4em; }
+@media (max-width: 1279px), (max-height: 639px), (prefers-reduced-motion: reduce) { :global(.scroll-enhanced) .depthLayers { display: none; } }
+
+
+:global(.scroll-enhanced) .root.root .frame:first-child { inset: 25vh 8vw 5vh 9vw; }
+:global(.scroll-enhanced) .root.root .frame:first-child figure { width: min(100%, calc(70svh * var(--image-ratio))) !important; }
+:global(.scroll-enhanced) .root.root .frame:nth-child(2) { inset: 24vh 7vw 9vh 30vw; transform: translateZ(30px); }

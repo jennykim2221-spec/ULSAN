@@ -1,0 +1,3 @@
+.root { max-width: 36em; }
+.root a { display: inline-flex; align-items: center; min-height: 44px; gap: .35em; }
+.root p { margin: .25rem 0 0; font-size: var(--fs-meta); }

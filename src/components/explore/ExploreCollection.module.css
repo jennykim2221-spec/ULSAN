@@ -1,0 +1,21 @@
+.collection { position: relative; width: 100%; height: 100svh; color: var(--palette-white); }
+.collection :global(.explore-planes) { position: absolute; inset: 0; perspective: 1600px; perspective-origin: 50% 38%; overflow: clip; }
+.collection :global(.explore-plane) { position: absolute; left: 50%; top: 38%; width: min(38vw, 560px); translate: -50% -50%; transform-origin: center; }
+.collection :global(.explore-plane) img { display: block; width: 100%; height: auto; max-height: 36svh; object-fit: contain; filter: saturate(.65); }
+.collection :global(.explore-plane[data-selected='false']) img { filter: saturate(.35) brightness(.65); }
+.visual { display: block; padding: 0; margin: 0; width: 100%; border: 0; background: transparent; cursor: pointer; }
+.information { position: absolute; top: 61%; left: 50%; translate: -50% 0; width: min(64vw, 840px); text-align: center; z-index: 34; pointer-events: none; }
+.information h3 { font: 500 clamp(30px, 3.8vw, 65px)/.98 var(--font-display); text-transform: uppercase; margin: 0 0 8px; letter-spacing: -.015em; }
+.information p { font-size: 13px; line-height: 1.6; margin: 4px 0; }
+.information .name { font-size: 19px; margin-bottom: 10px; }
+.information .english { font-size: 12px; opacity: .68; max-width: 66em; margin-inline: auto; }
+.information .location { font-size: 11px; margin-top: 12px; }
+.location span { color: var(--palette-mint); font-family: var(--font-mono); margin-right: 10px; }
+.information .feature { font-size: 12px; opacity: .65; }
+.navigation { position: absolute; bottom: 3vh; left: 50%; translate: -50% 0; display: flex; align-items: center; gap: 7px; z-index: 40; }
+.navigation button { min-width: 44px; min-height: 44px; background: transparent; border: 0; color: var(--palette-white); font: 12px var(--font-mono); cursor: pointer; opacity: .55; transition: opacity .2s, color .2s; }
+.navigation button[aria-current], .navigation button:hover { opacity: 1; color: var(--palette-mint); }
+.navigation button:focus-visible, .visual:focus-visible { outline: 2px solid var(--palette-mint); outline-offset: 5px; }
+@media (max-height: 780px) { .information { top: 59%; } .information h3 { font-size: clamp(28px, 3.3vw, 48px); } .information .name { margin-bottom: 5px; } .information .location { margin-top: 5px; } }
+@media (max-width: 900px) { .collection { height: 850px; } .collection :global(.explore-plane) { width: 64vw; top: 32%; } .information { top: 56%; width: 85%; } .navigation { gap: 0; } .navigation button { min-width: 34px; } }
+@media (prefers-reduced-motion: reduce) { .collection :global(.explore-planes) { perspective: none; } }

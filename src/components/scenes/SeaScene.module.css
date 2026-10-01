@@ -1,0 +1,44 @@
+.root {
+  position: relative;
+  min-height: 35vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.overview { position: relative; z-index: 1; width: min(68vw, 800px); }
+.structure { position: absolute; z-index: 2; width: min(26vw, 360px); opacity: .76; overflow: hidden; }
+.structure[data-port-image='port-2'] { right: 8vw; top: 20vh; clip-path: inset(0 0 32% 0); }
+.structure[data-port-image='port-3'] { right: 16vw; bottom: 15vh; clip-path: inset(45% 0 0 0); }
+.river { position: absolute; inset: -10vh 0; width: 100%; height: 120%; overflow: visible; color: var(--palette-mint); opacity: .48; pointer-events: none; }
+.toSea { position: absolute; z-index: 3; bottom: 12vh; left: 10vw; margin: 0; font: 500 clamp(54px, 11vw, 170px)/.86 var(--font-display); letter-spacing: .04em; color: var(--palette-white); }
+.portTitle { position: absolute; z-index: 3; left: 8vw; bottom: 11vh; margin: 0; font: 500 clamp(42px, 6vw, 92px)/.9 var(--font-display); letter-spacing: -.025em; color: var(--palette-white); }
+:global(.scroll-enhanced) [data-scene='sea'] [data-pin-stage] { overflow: clip; background: #071a2b; }
+:global(.scroll-enhanced) [data-scene='sea'] [data-scene-inner] { display: block; height: 100svh; min-height: 0; max-width: none; padding: 0; }
+:global(.scroll-enhanced) [data-scene='sea'] [data-scene-inner] > header { position: absolute; z-index: 4; left: var(--layout-gutter); top: 7vh; right: 30vw; pointer-events: none; }
+:global(.scroll-enhanced) [data-scene='sea'] [data-scene-content] { position: absolute; inset: 0; margin: 0; z-index: 1; }
+:global(.scroll-enhanced) [data-scene='sea'] .root { position: absolute; inset: 0; height: 100%; overflow: hidden; }
+:global(.scroll-enhanced) [data-scene='sea'] .overview { position: absolute; left: 50%; top: 50%; width: min(68vw, 800px); translate: -50% -50%; }
+:global(.scroll-enhanced) [data-scene='sea'] .structure { width: min(28vw, 420px); }
+:global(.scroll-enhanced) [data-scene='sea'] .river { z-index: 2; }
+:global(.scroll-enhanced) [data-scene='sea'] .toSea { bottom: 11vh; }
+:global(.scroll-enhanced) [data-scene='sea'] .portTitle { bottom: 11vh; }
+:global(.scroll-enhanced) [data-scene='sea'] [data-title-en] { font-size: clamp(40px, 5vw, 84px); }
+:global(.scroll-enhanced) [data-scene='sea'] [data-title-ko] { font-size: clamp(22px, 2vw, 34px); }
+:global(.scroll-enhanced) [data-scene='sea'] [data-body-ko],
+:global(.scroll-enhanced) [data-scene='sea'] [data-body-en] { font-size: 13px; max-width: 34em; }
+@media (prefers-reduced-motion: reduce) {
+  :global(.scroll-enhanced) [data-scene='sea'] [data-scene-inner] { display: grid; height: auto; min-height: 100svh; max-width: var(--layout-max-content); padding: clamp(48px, 8vh, 96px) var(--layout-gutter); }
+  :global(.scroll-enhanced) [data-scene='sea'] [data-scene-inner] > header,
+  :global(.scroll-enhanced) [data-scene='sea'] [data-scene-content],
+  :global(.scroll-enhanced) [data-scene='sea'] .root,
+  :global(.scroll-enhanced) [data-scene='sea'] .overview { position: relative; inset: auto; translate: none; width: 100%; }
+  :global(.scroll-enhanced) [data-scene='sea'] .structure { display: none; }
+  :global(.scroll-enhanced) [data-scene='sea'] .river { position: absolute; inset: 0; }
+  :global(.scroll-enhanced) [data-scene='sea'] .toSea { position: relative; inset: auto; font-size: clamp(48px, 12vw, 110px); }
+  :global(.scroll-enhanced) [data-scene='sea'] .portTitle { position: relative; inset: auto; }
+}
+
+
+:global(.scroll-enhanced) [data-scene='sea'] .overview { width: 86vw; }
+:global(.scroll-enhanced) [data-scene='sea'] .overview figure { width: 100% !important; }
+:global(.scroll-enhanced) [data-scene='sea'] .overview::after { content: ''; position: absolute; inset: 0; z-index: 12; pointer-events: none; background: linear-gradient(125deg, rgb(7 26 43 / .72), transparent 65%), linear-gradient(0deg, rgb(7 26 43 / .45), transparent 35%); }

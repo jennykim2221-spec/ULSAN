@@ -1,0 +1,78 @@
+.collage, .track { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4rem; }
+.collage li, .track li { min-width: 0; }
+.collage p, .meta, .dissolve p { font: 12px/1.6 var(--font-mono); }
+.collage p { margin: 16px 0 0; }
+.index { display: inline-block; margin-right: 20px; opacity: .55; }
+.collage figure, .oldTower figure { outline: 6px solid var(--palette-white); box-shadow: 0 14px 38px rgb(5 6 7 / .2); }
+.track h3 { font: 500 24px/1.15 var(--font-body); margin: 20px 0; }
+.track h3 span { display: block; font: 500 clamp(36px, 4.5vw, 76px)/1 var(--font-display); margin-top: 8px; }
+.year { font: 500 clamp(100px, 15vw, 250px)/.85 var(--font-display); margin: 0; letter-spacing: -.04em; }
+.begin h3 { font: 500 clamp(36px, 4vw, 68px)/1 var(--font-display); }
+.productionImages { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 32px; }
+.dissolve { position: relative; }
+.newTower { margin-top: 48px; }
+.grain, .todayMono { display: none; }
+.todayImage { position: relative; }
+.today h3 { font: 500 clamp(72px, 10vw, 160px)/1 var(--font-display); }
+:global(.scroll-enhanced) .collage { position: relative; height: 100svh; display: block; }
+:global(.scroll-enhanced) .collage li { position: absolute; width: 42vw; left: 4vw; top: 38%; }
+:global(.scroll-enhanced) .collage li:nth-child(2) { left: 47vw; top: 39%; width: 32vw; }
+:global(.scroll-enhanced) .collage li:nth-child(3) { left: 9vw; top: 44%; width: 34vw; }
+:global(.scroll-enhanced) .collage li:nth-child(4) { left: 37vw; top: 50%; width: 48vw; }
+:global(.scroll-enhanced) .collage li:nth-child(5) { left: 30vw; top: 40%; width: 38vw; }
+:global(.scroll-enhanced) .collage figure { margin-inline: 0 !important; }
+:global(.scroll-enhanced) .track { position: relative; display: flex; flex-direction: row; align-items: center; width: max-content; height: 100svh; gap: 10vw; padding: 0 12vw 0 9vw; will-change: transform; }
+:global(.scroll-enhanced) .track > li { flex: 0 0 auto; position: relative; width: 58vw; padding-top: 80px; }
+:global(.scroll-enhanced) .track > .begin { width: 64vw; padding-left: 5vw; }
+:global(.scroll-enhanced) .track > .labor { width: 48vw; padding-top: 110px; }
+:global(.scroll-enhanced) .track > .construction { width: 46vw; padding-top: 0; }
+:global(.scroll-enhanced) .track > .production { width: 68vw; }
+:global(.scroll-enhanced) .track > .monument { width: 82vw; padding-top: 70px; }
+:global(.scroll-enhanced) .track > .expansion { width: 52vw; }
+:global(.scroll-enhanced) .track > .today { width: 76vw; padding-top: 0; }
+:global(.scroll-enhanced) .track figure { margin-inline: 0 !important; }
+:global(.scroll-enhanced) .labor h3 span { font-size: clamp(90px, 11vw, 180px); }
+:global(.scroll-enhanced) .construction h3 { margin-left: 12vw; }
+:global(.scroll-enhanced) .productionImages { flex-wrap: nowrap; align-items: center; gap: 6vw; }
+:global(.scroll-enhanced) .productionImages figure:first-child { width: min(340px, 27svh) !important; }
+:global(.scroll-enhanced) .productionImages figure:last-child { align-self: flex-end; margin-bottom: 3vh; }
+:global(.scroll-enhanced) .dissolve { height: 48svh; }
+:global(.scroll-enhanced) .oldTower { position: absolute; left: 4vw; top: 4vh; }
+:global(.scroll-enhanced) .newTower { position: absolute; left: 24vw; top: 0; margin: 0; }
+:global(.scroll-enhanced) .newTower figure { width: min(640px, 62vw, 64svh) !important; }
+:global(.scroll-enhanced) .grain { display: block; pointer-events: none; position: absolute; inset: -12px; opacity: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E"); }
+:global(.scroll-enhanced) .todayImage { width: min(76vw, 1600px, 90svh); margin-inline: auto; }
+:global(.scroll-enhanced) .todayImage figure { width: 100% !important; }
+:global(.scroll-enhanced) .todayMono { display: block; position: absolute; inset: 0; filter: grayscale(1); }
+:global(.scroll-enhanced) .today h3 { margin: 0 0 12px; font-size: clamp(64px, 8vw, 120px); }
+
+:global(.scroll-enhanced) .labor figure { filter: grayscale(1); }
+:global(.scroll-enhanced) .construction figure { filter: grayscale(1); }
+:global(.scroll-enhanced) .productionImages figure { filter: grayscale(.78); }
+:global(.scroll-enhanced) .expansion figure { filter: grayscale(.5); }
+.exhibitionLine { display: none; }
+:global(.scroll-enhanced) .exhibitionLine { display: block; position: absolute; left: var(--layout-gutter); right: calc(var(--layout-gutter) + var(--layout-nav-reserve)); top: 30px; height: 1px; background: #ffffff18; pointer-events: none; }
+:global(.scroll-enhanced) .exhibitionLine span { display: block; height: 1px; background: currentColor; transform-origin: left; }
+@media (max-height: 800px) {
+  :global(.scroll-enhanced) .todayImage { width: min(76vw, 1600px, 80svh); }
+}
+
+/* Visual refinement: one stationary, shared frame during the timeline hold. */
+:global(.scroll-enhanced) .dissolve { width: min(52vw, 559px); height: min(37svh, 357px); margin-inline: auto; background: var(--palette-black); }
+:global(.scroll-enhanced) .oldTower,
+:global(.scroll-enhanced) .newTower { position: absolute; inset: 0; margin: 0; width: 100%; height: 100%; }
+:global(.scroll-enhanced) .dissolve figure { width: 100% !important; height: 100%; aspect-ratio: auto !important; outline: none; box-shadow: none; }
+:global(.scroll-enhanced) .dissolve img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
+:global(.scroll-enhanced) .dissolve p { display: none; }
+:global(.scroll-enhanced) .monument > h3,
+:global(.scroll-enhanced) .monument > p { text-align: center; }
+.todaySurface { position: relative; }
+.todayShade { display: none; }
+:global(.scroll-enhanced) .todayImage { height: min(48svh, 600px); width: min(64vw, 960px); }
+:global(.scroll-enhanced) .todaySurface { position: absolute; inset: 0 auto auto 0; width: 100%; height: 100%; overflow: hidden; background: var(--palette-black); }
+:global(.scroll-enhanced) .todaySurface figure { width: 100% !important; height: 100%; max-width: none; aspect-ratio: auto !important; }
+:global(.scroll-enhanced) .todaySurface img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 54%; }
+:global(.scroll-enhanced) .todayShade { display: block; position: absolute; inset: 0; background: var(--palette-black); z-index: 12; pointer-events: none; }
+:global(.scroll-enhanced) .today h3 { position: relative; z-index: 22; transform-origin: left top; font-size: clamp(64px, 7vw, 100px); }
+:global(.scroll-enhanced) .today { z-index: 15; }
+:global(.scroll-enhanced) .collage img { filter: grayscale(1); }

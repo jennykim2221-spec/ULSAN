@@ -1,0 +1,19 @@
+.root {
+  min-height: 40vh;
+}
+
+.cue {
+  margin: 0.25rem 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+}
+
+.root a { display: inline-flex; align-items: center; min-height: 44px; flex-wrap: wrap; gap: .35em; }
+.water { display: none; }
+:global(.scroll-enhanced) .water { display: block; opacity: 0; position: absolute; top: 0; left: 50%; translate: -50% 0; width: 100vw; height: 100svh; z-index: 5; pointer-events: none; overflow: hidden; }
+:global(.scroll-enhanced) [data-scene='intro'] [data-scene-content] { position: static; }
+.water video { width: 100%; height: 100%; object-fit: cover; transform: scale(1.12); filter: saturate(.22) contrast(1.12) brightness(.64); }
+.water::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(7 26 43 / .25), transparent 40%, #071a2b); }
+@media (prefers-reduced-motion: reduce) { .water { display: none !important; } }

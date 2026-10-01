@@ -1,0 +1,21 @@
+.root {
+  min-height: 42vh;
+  display: grid;
+  place-items: center;
+}
+.media { width: 100%; }
+:global(.scroll-enhanced) [data-scene='whale'] [data-pin-stage] { overflow: clip; background: #050b14; }
+:global(.scroll-enhanced) [data-scene='whale'] [data-scene-inner] { display: block; height: 100svh; min-height: 0; max-width: none; padding: 0; }
+:global(.scroll-enhanced) [data-scene='whale'] [data-scene-inner] > header { position: absolute; z-index: 46; left: var(--layout-gutter); right: var(--layout-nav-reserve); top: 8vh; pointer-events: none; }
+:global(.scroll-enhanced) [data-scene='whale'] [data-scene-content] { position: absolute; inset: 0; margin: 0; z-index: 1; pointer-events: none; }
+:global(.scroll-enhanced) [data-scene='whale'] .root { position: absolute; inset: 0; height: 100%; }
+:global(.scroll-enhanced) [data-scene='whale'] [data-title-en] { font-size: clamp(38px, 4vw, 68px); }
+:global(.scroll-enhanced) [data-scene='whale'] [data-title-ko] { font-size: clamp(21px, 2vw, 32px); }
+:global(.scroll-enhanced) [data-scene='whale'] [data-body-ko],
+:global(.scroll-enhanced) [data-scene='whale'] [data-body-en] { font-size: 13px; max-width: 40em; }
+@media (prefers-reduced-motion: reduce) {
+  :global(.scroll-enhanced) [data-scene='whale'] [data-scene-inner] { display: grid; height: auto; min-height: 100svh; max-width: var(--layout-max-content); padding: clamp(48px, 8vh, 96px) var(--layout-gutter); }
+  :global(.scroll-enhanced) [data-scene='whale'] [data-scene-inner] > header { position: static; }
+  :global(.scroll-enhanced) [data-scene='whale'] [data-scene-content] { position: relative; inset: auto; }
+  :global(.scroll-enhanced) [data-scene='whale'] .root { position: relative; min-height: 36vh; }
+}
