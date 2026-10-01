@@ -17,7 +17,7 @@ async function fixedFrame(page: Page) {
   await expect(video).toHaveCSS('object-fit', 'cover');
   expect(await video.evaluate(v => getComputedStyle(v.parentElement!).maskImage)).toBe('none');
 }
-for (const width of [1440,1280,1600,1920]) test(`${width} fullscreen native playback and complete composition exit`, async ({ page }) => {
+for (const width of [1440,1280,1600,1920]) test(`${width} fullscreen native playback and depth-mask handoff`, async ({ page }) => {
   test.setTimeout(150000);
   const errors: string[] = [];
   page.on('pageerror', e => errors.push(e.message));
@@ -61,7 +61,8 @@ for (const width of [1440,1280,1600,1920]) test(`${width} fullscreen native play
   await page.screenshot({path:`.tools/whale-native-qa/${width}-exit.png`});
   await go(page,'jangsaengpo',.99);
   const exitBox=(await page.locator('#jangsaengpo [data-scene-inner]').boundingBox())!;
-  expect(exitBox.x).toBeGreaterThanOrEqual(width);
+  expect(exitBox.x).toBe(0);
+  expect(await page.locator('#jangsaengpo [data-scene-inner]').evaluate(el => parseFloat(getComputedStyle(el).getPropertyValue('--port-opening')))).toBeGreaterThanOrEqual(149);
   await page.screenshot({path:`.tools/whale-native-qa/${width}-exit-complete.png`});
   await go(page,'sea',.35);
   await expect(video).toHaveJSProperty('paused',true);

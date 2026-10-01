@@ -182,8 +182,8 @@ function CenteredPlane({item, index, count, position, pointerX, pointerY, reduce
     const transform = useTransform([distance, pointerX, pointerY], ([d, px, py]: number[]) => {
         const depth = Math.min(3, Math.abs(d));
         const scale = 1 / (1 + depth * .65);
-        const vertical = depth * -24 + (reduced ? 0 : py * 8 / (1 + depth));
-        return `translate3d(calc(${d} * min(22vw, 310px) + ${reduced ? 0 : px * 10 / (1 + depth)}px), ${vertical}px, ${reduced ? 0 : -depth * 90}px) scale(${scale})`;
+        const vertical = reduced ? -depth * 16 : Math.sin(d * 1.6) * 105 - depth * 28 + py * 8 / (1 + depth);
+        return `translate3d(calc(${d} * min(17vw, 245px) + ${reduced ? 0 : px * 10 / (1 + depth)}px), ${vertical}px, ${reduced ? 0 : -depth * 90}px) scale(${scale})`;
     });
     const opacity = useTransform(distance, d => Math.max(0, 1 - Math.abs(d) * .38));
     const zIndex = useTransform(distance, d => Math.round(30 - Math.abs(d) * 8));

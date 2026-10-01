@@ -76,11 +76,10 @@ test('1440 actual typography/photo/video distortion, recovery and clickable UI',
  await bend(page,'[data-intro-video] video','taehwa-video-pixels',false);
  await page.locator('[data-intro-video] video').evaluate(v=>(v as HTMLVideoElement).playbackRate=1);
  await page.mouse.move(500,430);await page.mouse.move(790,475,{steps:14});await page.screenshot({path:'.tools/content-distortion-qa/taehwa-video.png'});
- await go(page,'explore',.04);await bend(page,'#explore [data-title-en]','EXPLORE-ULSAN');
- await page.locator('#explore details summary').first().click();
- const img=page.locator('#explore details[open] img').first();await page.waitForTimeout(1600);
+ await go(page,'explore',.35);await bend(page,'#explore [data-title-en]','EXPLORE-ULSAN');
+ const img=page.locator('#explore [data-selected="true"] img').first();await page.waitForTimeout(1600);
  await img.evaluate(el=>scrollTo(0,scrollY+el.getBoundingClientRect().top-150));await page.waitForTimeout(1600);
- await bend(page,'#explore details[open] [data-photo-link]','explore-photo',false);
+ await bend(page,'#explore [data-selected="true"] [data-photo-link]','explore-photo',false);
  await page.locator('summary').filter({hasText:'CHAPTERS'}).click();await page.locator('details a[href="#recovery"]').click();await expect(page.locator('#recovery-heading')).toBeFocused();
  await expect(page.locator('canvas')).toHaveCount(1);expect(await page.locator('[data-global-ripple-canvas]').evaluate(el=>(el as HTMLCanvasElement).width)).toBeLessThanOrEqual(512);
  await page.emulateMedia({reducedMotion:'reduce'});await expect(page.locator('canvas,[data-distortion-surface]')).toHaveCount(0);

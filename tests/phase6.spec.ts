@@ -86,11 +86,21 @@ for(const width of [1440,1280,1600,1920]) test(`${width} Phase 6 connected compo
     await page.mouse.wheel(0,6000); await page.waitForTimeout(1800); expect(await page.evaluate(()=>scrollY)).toBeGreaterThan(y+2000);
     await page.mouse.wheel(0,-6000); await page.waitForTimeout(1800); await go(page,'explore',.3);
     await page.reload(); await expect(page.locator('#__ulsan-story')).toHaveAttribute('data-scroll-ready','true'); await go(page,'explore',.35);
+    await page.locator('summary').filter({hasText:'CHAPTERS'}).click();
+    await page.locator('details a[href="#sea"]').click(); await expect(page.locator('#sea-heading')).toBeFocused();
+    await go(page,'garden',.85);
+    await page.locator('nav[aria-label="강 장면 목록"] a[href="#explore"]').click(); await expect(page.locator('#explore-heading')).toBeFocused();
+    await go(page,'explore',.35);
+    await page.bringToFront();
+    await page.mouse.move(560,300); await page.mouse.move(820,350,{steps:18});
+    const frames = await page.evaluate(() => new Promise<number>(resolve => {let last=performance.now(),sum=0,n=0; const sample=(now:number)=>{sum+=now-last;last=now;if(++n===60)resolve(sum/n);else requestAnimationFrame(sample);};requestAnimationFrame(sample);}));
+    console.log('1440 active frame mean', frames); expect(frames).toBeLessThan(55);
   }
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await expect(page.locator('canvas')).toHaveCount(1); expect(errors).toEqual([]);
 });
 test('Phase 6 reduced motion preserves collection and native reading order', async({page}) => {
+  const errors: string[]=[]; page.on('pageerror',e=>errors.push(e.message)); page.on('console',e=>{if(e.type()==='error')errors.push(e.text());});
   await page.emulateMedia({reducedMotion:'reduce'}); await page.goto('/#explore');
   await expect(page.locator('#__ulsan-story')).toHaveAttribute('data-motion-profile','reduced');
   await expect(page.locator('canvas, .pin-spacer')).toHaveCount(0);
@@ -98,4 +108,5 @@ test('Phase 6 reduced motion preserves collection and native reading order', asy
   await expect(page.locator('[data-explore-collection]')).toHaveAttribute('data-destination','seongnamsa');
   await expect(page.locator('[data-selected="true"] [data-photo-link]')).toBeVisible();
   await page.screenshot({path:'.tools/phase6-qa/reduced.png'});
+  expect(errors).toEqual([]);
 });

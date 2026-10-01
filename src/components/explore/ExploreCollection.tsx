@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import Image from 'next/image';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { CollectionSurfer } from '@/components/ui/collection-surfer';
 import { PhotoInteraction } from '@/components/story/PhotoInteraction';
 import { assetPublicUrl, assetsById } from '@/data/assets';
@@ -14,10 +14,17 @@ import styles from './ExploreCollection.module.css';
 const order: PlaceId[] = ['daewangam', 'ganjeolgot', 'seongnamsa', 'ganwoljae', 'bangucheon', 'taehwa', 'jangsaengpo'];
 const destinations = order.map(id => placesById[id]);
 const items = destinations.map((place, id) => ({id, title: place.name.en, image: assetPublicUrl(assetsById[place.assetIds[0]].filename)}));
+const subscribeMotion = (notify: () => void) => {
+  const media = matchMedia('(prefers-reduced-motion: reduce)');
+  media.addEventListener('change', notify);
+  return () => media.removeEventListener('change', notify);
+};
+const readMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 export function ExploreCollection() {
   const [selected, setSelected] = useState(0);
-  const reduced = useReducedMotion();
+  // Identical server / first hydration snapshot, then the OS preference.
+  const reduced = useSyncExternalStore(subscribeMotion, readMotion, () => false);
   const place = destinations[selected];
   const step = (delta: number) => setSelected(current => (current + delta + items.length) % items.length);
   return <div className={styles.collection} data-explore-collection data-destination={place.id}
